@@ -3,18 +3,19 @@
 ## Histórico de Revisões
 
 | Data | Versão | Descrição | Autores |
-| :--: | :----: | :-------: | :-----: |
-| - | - | Versão inicial |  - |
+| :---: | :---: | :---: | :---: |
+| 02/06/2026 | 0.1 | Versão inicial | prof. Fellipe |
 | - | - | - |  - |
 
 ## 1. Diagrama de Casos de Uso
 
 ![Substitua pela imagem do diagrama...](imgs/placeholder.png)
-> Substitua pela imagem do diagrama...
+> Em desenvolvimento...
 
 [LINK para o arquivo com o modelo](/doc/arquivo_astah/nome_do_projeto.asta)
 
 ## 2. Listagem dos Detalhamentos dos Casos de Uso
 
-1. [CDU-001 - Nome...](cdu-001/detalhamento-001.md)
-2. [CDU-002 - Nome...](cdu-002/detalhamento-002.md)
+1. [CDU-01 - Nome...](cdu-01/detalhamento-01.md)
+2. [CDU-02 - Nome...](cdu-02/detalhamento-02.md)
+2. [CDU-05 - Agendar Teleconsulta](cdu-05/detalhamento-05.md) :white_check_mark:

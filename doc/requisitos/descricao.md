@@ -1,0 +1,11 @@
+# Descrição Inicial do Sistema Proposto
+
+A clínica de psicologia "MenteSã" decidiu expandir seus atendimentos e precisa de um novo sistema web para gerenciar consultas online. Os idealizadores do projeto descreveram o funcionamento desejado do sistema da seguinte forma:
+
+"Nossa plataforma deve permitir que qualquer pessoa se cadastre como paciente, informando seus dados pessoais básicos. Uma vez logado, o paciente poderá pesquisar por psicólogos utilizando filtros como especialidade (ex: Terapia Cognitivo-Comportamental, Psicanálise) ou faixa de preço. Quando o paciente encontra um profissional adequado, ele pode visualizar a agenda disponível e solicitar o agendamento de uma sessão. Para confirmar o agendamento, o sistema deve obrigar o paciente a realizar o pagamento via cartão de crédito ou PIX integrado à plataforma.
+
+É crucial que a plataforma seja extremamente segura, garantindo que todas as videochamadas possuam criptografia de ponta a ponta para proteger a privacidade das sessões em conformidade com a LGPD (Lei Geral de Proteção de Dados). Além disso, o sistema deve ser responsivo para funcionar perfeitamente tanto em computadores quanto em celulares, e o tempo de carregamento de qualquer tela não deve ultrapassar 3 segundos.
+
+Os psicólogos também terão acesso ao sistema. Eles precisam se cadastrar, mas suas contas só são ativadas após um Administrador do sistema verificar e aprovar a validade do seu CRP (Conselho Regional de Psicologia). Apenas psicólogos com CRP ativo na base do conselho podem clinicar. O psicólogo aprovado poderá configurar seus horários de disponibilidade, aceitar ou recusar solicitações de agendamento e, após cada sessão, registrar a evolução do paciente (prontuário).
+
+Estabelecemos algumas políticas importantes: cada sessão tem a duração exata de 50 minutos. Caso o paciente precise cancelar uma consulta, ele só terá direito ao reembolso integral se o cancelamento for realizado no sistema com, no mínimo, 24 horas de antecedência do horário marcado. Se o cancelamento for feito com menos de 24 horas, o sistema não deve processar o reembolso. Sempre que um agendamento ou cancelamento ocorrer, o sistema deve disparar um e-mail automático notificando as partes envolvidas."

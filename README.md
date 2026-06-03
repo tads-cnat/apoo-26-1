@@ -1,29 +1,14 @@
-# Título do Projeto
+# Sistema para a Clínica MenteSã
 
-<img src="logo.png" width="200" height="200" />
+<img src="./doc/imgs/logo.png" width="200" />
 
-> Inserir a marca gráfica do projeto
-
-> Inserir o sumário executivo do projeto
-
-# Equipe e Formas de Contato
-
-1. Nome...
-2. Nome...
-
-> Descrever as formas de contato da equipe - WhatsApp, Discord, etc.
-
-# Horário de Reuniões
-
-> Listar dias, horários e local das reuniões da equipe
-
-> [!TIP]
-> Obs.: é fortemente recomendado que todas as reuniões da equipe sejam registradas na forma de tarefas (*issues*), contendo essencialmente informações como: presentes, temas discutidos e os encaminhamentos. Essas tarefas devem ser marcadas com o label correspondente.
+Trata-se do Sistema Web (exemplo) para a disciplina de Análise e Projeto Orientado a Objetos, no semestre 2026.1. Especificamente, trata-se de um sistema Web (a ser desenvolvido em Django/Python) visando a automatização das rotinas de uma clínica de psicologia.
 
 # Documentação
 
 Clique em cada um dos links abaixo para acessar o artefato específico.
 
+1. [Descrição Inicial](doc/requisitos/descricao.md)
 1. [Documento de Visão](doc/visao/doc-visao.md)
 1. [Protótipos de Interface com o Usuário](doc/prototipos/prototipos.md)
 1. [Modelo de Casos de Uso](doc/cdu/cdu.md)

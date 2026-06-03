@@ -3,20 +3,19 @@
 ## Histórico de Revisões
 
 | Data | Versão | Descrição | Autores |
-| :--: | :----: | :-------: | :-----: |
-| - | - | Versão inicial |  - |
+| :---: | :---: | :---: | :---: |
+| 02/06/2026 | 0.1 | Versão inicial | prof. Fellipe |
 | - | - | - |  - |
 
 ## 1. Diagrama das Classes Conceituais do Domínio
 
-![Substituir pela imagem do diagrama de classes de domínio...](imgs/placeholder.png)
-> Substituir pela imagem do diagrama de classes de domínio...
+![Modelo de Classes Conceituais](imgs/dominio.png)
 
-[LINK para o arquivo com o modelo](/doc/arquivo_astah/nome_do_projeto.asta)
+[LINK para o arquivo com o modelo](/doc/arquivo_astah/MenteSa.asta)
 
 ## 2. Glossário (sugestão)
 
 | Termo | Explicação |
-| :---: | :--------: |
-| Termo 1 | Explicação 1... |
-| Termo 2 | Explicação 2... |
+| :---: | :---: |
+| Especialidade | Define a abordagem utilizada pelo profissional ou uma descrição do seu público alvo. |
+| PrecoConsulta | Possibilidade do profissional definir preços diferentes para tipos de atendimento diferentes. |
