@@ -1,6 +1,6 @@
 # Sistema para a Clínica MenteSã
 
-<img src="./doc/imgs/logo.png" width="200" />
+<img src="./doc/imgs/logo.png" width="250" />
 
 Trata-se do Sistema Web (exemplo) para a disciplina de Análise e Projeto Orientado a Objetos, no semestre 2026.1. Especificamente, trata-se de um sistema Web (a ser desenvolvido em Django/Python) visando a automatização das rotinas de uma clínica de psicologia.
 
