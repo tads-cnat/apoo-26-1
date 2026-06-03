@@ -9,8 +9,7 @@
 
 ## 1. Diagrama de Casos de Uso
 
-![Substitua pela imagem do diagrama...](imgs/placeholder.png)
-> Em desenvolvimento...
+![Diagrama de Casos de Uso](imgs/cdu_v01.png)
 
 [LINK para o arquivo com o modelo](/doc/arquivo_astah/nome_do_projeto.asta)
 
