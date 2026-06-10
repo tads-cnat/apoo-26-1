@@ -46,7 +46,11 @@
 
 ## Diagrama de Interação (Sequência ou Comunicação)
 
-> Substituir pela imagem correspondente...
+### Diagrama de Sequência - ETAPA 1
+![Diagrama de Sequência - ETAPA 1](./imgs/etapa_1.png)
+
+### Diagrama de Sequência - ETAPA 2
+![Diagrama de Sequência - ETAPA 2](./imgs/etapa_2.png)
 
 ## Diagrama de Classes de Projeto
 
