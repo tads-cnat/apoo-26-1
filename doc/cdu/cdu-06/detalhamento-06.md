@@ -44,9 +44,16 @@
 
 > Obs. as seções a seguir apenas serão utilizadas na segunda unidade do PDSWeb (segundo orientações do gerente do projeto).
 
-## Diagrama de Interação (Sequência ou Comunicação)
+## Diagramas de Interação (Sequência ou Comunicação)
 
-> Substituir pela imagem correspondente...
+### Diagrama de Sequência - ETAPA 1
+![Diagrama de Sequência - ETAPA 1](./imgs/sequencia_6_1.png)
+
+### Diagrama de Sequência - ETAPA 2
+![Diagrama de Sequência - ETAPA 2](./imgs/sequencia_6_2.png)
+
+### Diagrama de Sequência - ETAPA 3
+![Diagrama de Sequência - ETAPA 3](./imgs/sequencia_6_3.png)
 
 ## Diagrama de Classes de Projeto
 

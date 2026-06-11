@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+  {% if psicologos %}
+    <ul>
+      {% for psicologo in psicologos %}
+        <li>
+          <strong>{{ psicologo.nome }}</strong> - CRP: {{ psicologo.crp }}
+          {% if psicologo.especialidades.all %}
+            <br/><small>Especialidades: {{ psicologo.especialidades.all|join:", " }}</small>
+          {% endif %}
+          <br/><a href="{% url 'detalhar_psicologo' psicologo.id %}">Marcar consulta!</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Não há psicólogos cadastrados no momento.</p>
+  {% endif %}
+{% endblock %}
