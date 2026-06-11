@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Confirmar Consulta{% endblock %}
+
+{% block conteudo %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Confirmar Agendamento da Consulta</h2>
+                </div>
+                
+                <div class="card-body">
+                    <!-- Detalhes da Consulta -->
+                    <div class="section mb-4">
+                        <h4 class="mb-3">Detalhes da Consulta</h4>
+                        <div class="details-box p-3 bg-light rounded">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p><strong>Data:</strong> {{ consulta.horario.data|date:"d/m/Y" }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Horário:</strong> {{ consulta.horario.hora|time:"H:i" }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p><strong>Psicólogo:</strong> {{ consulta.horario.agenda.psicologo.nome }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>CRP:</strong> {{ consulta.horario.agenda.psicologo.crp }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>E-mail:</strong> {{ consulta.horario.agenda.psicologo.email }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Especialidades:</strong> {{ consulta.horario.agenda.psicologo.especialidades.all|join:", " }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Forma de Pagamento -->
+                    <div class="section mb-4">
+                        <h4 class="mb-3">Forma de Pagamento</h4>
+                        <form method="post" id="formaPagamentoForm">
+                            {% csrf_token %}
+                            <div class="payment-options">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="forma_pagamento" id="pagamentoOnline" value="online" required>
+                                    <label class="form-check-label" for="pagamentoOnline">
+                                        <strong>Pagamento Online</strong>
+                                        <p class="text-muted ms-4">Realize o pagamento agora através de cartão de crédito, débito ou PIX</p>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="radio" name="forma_pagamento" id="pagamentoPresencial" value="presencial" required>
+                                    <label class="form-check-label" for="pagamentoPresencial">
+                                        <strong>Pagamento Presencial</strong>
+                                        <p class="text-muted ms-4">Realize o pagamento no dia da consulta, presencialmente</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Informações Importantes -->
+                    <div class="alert alert-info" role="alert">
+                        <h5 class="alert-heading">
+                            <i class="fas fa-info-circle"></i> Informações Importantes
+                        </h5>
+                        <ul class="mb-0">
+                            <li>Esta consulta pode ser cancelada até <strong>24 horas antes</strong> do horário agendado.</li>
+                            <li>Por favor, chegue com 10 minutos de antecedência.</li>
+                            <li>Lembre-se de levar documentos de identificação e cartão de saúde, se aplicável.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Termo de Aceite -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="aceiteTermos" required>
+                            <label class="form-check-label" for="aceiteTermos">
+                                Confirmo que li e aceito os termos acima e desejo agendar esta consulta.
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success btn-lg flex-grow-1" form="confirmaConsultaForm">
+                            <i class="fas fa-check"></i> Confirmar Agendamento
+                        </button>
+                        <!-- TODO: Implement cancel button functionality -->
+                        <a href="#" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulário Oculto para Submit -->
+            <form method="get" id="confirmaConsultaForm" style="display: none;" action="#">
+                {% csrf_token %}
+                <input type="hidden" name="consulta_id" value="{{ consulta.id }}">
+                <input type="hidden" name="forma_pagamento" id="formaPagamentoHidden">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelector('.btn-success').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Validar se forma de pagamento foi selecionada
+    const formaPagamento = document.querySelector('input[name="forma_pagamento"]:checked');
+    const aceitouTermos = document.getElementById('aceiteTermos').checked;
+    
+    if (!formaPagamento) {
+        alert('Por favor, selecione uma forma de pagamento.');
+        return;
+    }
+    
+    if (!aceitouTermos) {
+        alert('Por favor, aceite os termos para continuar.');
+        return;
+    }
+    
+    // Preencher campo oculto e enviar formulário
+    document.getElementById('formaPagamentoHidden').value = formaPagamento.value;
+    document.getElementById('confirmaConsultaForm').submit();
+});
+</script>
+
+<style>
+    .details-box {
+        border-left: 4px solid #0d6efd;
+    }
+    
+    .payment-options {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+    }
+    
+    .payment-options .form-check-label {
+        cursor: pointer;
+        padding-left: 5px;
+    }
+    
+    .payment-options .form-check-label p {
+        margin: 5px 0 0 0;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}

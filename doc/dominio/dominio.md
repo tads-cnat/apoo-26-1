@@ -5,6 +5,7 @@
 | Data | Versão | Descrição | Autores |
 | :---: | :---: | :---: | :---: |
 | 02/06/2026 | 0.1 | Versão inicial | prof. Fellipe |
+| 10/06/2026 | 0.2 | Ajustes após a aula de 10/06 | prof. Fellipe |
 | - | - | - |  - |
 
 ## 1. Diagrama das Classes Conceituais do Domínio

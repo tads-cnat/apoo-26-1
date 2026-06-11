@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}Agenda do Psicólogo{% endblock %}
+
+{% block conteudo %}
+	<div class="container">
+		<h1>Psicólogo: {{ psicologo.nome }}</h1>
+
+		<div class="card">
+			<div class="card-body">
+				<p><strong>CRP:</strong> {{ psicologo.crp }}</p>
+                <p><strong>Especialidade:</strong> {{ psicologo.especialidades.all|join:", " }}</p>
+				<p><strong>E-mail:</strong> {{ psicologo.email }}</p>
+				<!-- 
+                {% if psicologo.foto %}
+					<img src="{{ psicologo.foto.url }}" alt="Foto do Psicólogo" style="max-width:150px;" />
+				{% endif %}
+                -->
+			</div>
+		</div>
+
+		<h2 style="margin-top:1.5rem">Horários disponíveis</h2>
+		{% if horarios and horarios|length > 0 %}
+			<div class="list-group">
+				{% for horario in horarios %}
+					<div class="list-group-item d-flex justify-content-between align-items-center">
+						<div>
+							<strong>{{ horario.data }}</strong> — {{ horario.hora }}
+						</div>
+						<div>
+							<form method="post" action="{% url 'agendar_consulta' horario.id %}">
+								{% csrf_token %}
+                                <select name="tipo" required class="form-select form-select-sm" style="width: auto; display: inline-block; margin-right: 0.5rem;">
+                                    <option value="1">Paciente criança</option>
+                                    <option value="2" selected>Paciente adulto</option>
+                                    <option value="3">Atendimento de casal</option>
+                                </select>
+								<input type="hidden" name="psicologo_id" value="{{ psicologo.id }}">
+								<button type="submit" class="btn btn-primary">Agendar</button>
+							</form>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<p>Não há horários disponíveis no momento.</p>
+		{% endif %}
+
+		<p style="margin-top:1rem"><a href="{% url 'home' %}">Voltar à página inicial</a></p>
+	</div>
+{% endblock %}
