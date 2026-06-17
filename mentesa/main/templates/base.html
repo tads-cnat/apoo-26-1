@@ -14,10 +14,14 @@
                     <h1 class="h3 mb-0">MenteSã</h1>
                     <p class="small mb-0">Clínica de Psicologia e Bem-estar</p>
                 </div>
-                <nav>
+                <nav class="d-flex align-items-center">
                     <a class="text-white me-3" href="/">Início</a>
-                    <a class="text-white me-3" href="/psicologos/">Psicólogos</a>
-                    <a class="text-white" href="/agenda/">Agenda</a>
+                    <a class="text-white me-3" href="#">A clínica</a>
+                    <a class="text-white me-3" href="{% url 'psicologos' %}">Psicólogos</a>
+                    <form class="d-flex" method="get" action="{% url 'buscar_psicologo' %}" role="search">
+                        <input name="nome" class="form-control form-control-sm me-2" type="search" placeholder="Pesquisar psicólogo" aria-label="Pesquisar psicólogo">
+                        <button class="btn btn-sm btn-light" type="submit">Pesquisar</button>
+                    </form>
                 </nav>
             </div>
         </div>
@@ -26,7 +30,7 @@
     <main class="container my-5">
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
                     {{ message }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>

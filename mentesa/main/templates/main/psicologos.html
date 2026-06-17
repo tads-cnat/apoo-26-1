@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block titulo %}Psicólogos - MenteSã{% endblock %}
+
+{% block conteudo %}
+  <style>
+    .psychologists-list {
+      background: #f7fbff;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      margin-bottom: 24px;
+    }
+    .psychologists-list header {
+      margin-bottom: 20px;
+    }
+    .psychologists-list h2 {
+      margin: 0 0 8px;
+      font-size: 1.8rem;
+      color: #1a3f6c;
+    }
+    .psychologists-list p {
+      margin: 0;
+      color: #475569;
+    }
+    .psychologists {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+    .psychologist-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 18px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .psychologist-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+    }
+    .psychologist-card h2 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      color: #0f3d74;
+    }
+    .psychologist-card p {
+      margin: 6px 0;
+      color: #334155;
+      line-height: 1.5;
+    }
+    .no-results {
+      padding: 18px;
+      background: #fffbeb;
+      border: 1px solid #f5c06f;
+      border-radius: 12px;
+      color: #794200;
+    }
+    .button-link {
+      display: inline-block;
+      padding: 10px 16px;
+      margin-top: 12px;
+      background: #1a73e8;
+      color: #ffffff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .button-link:hover {
+      background: #125fd1;
+      transform: translateY(-1px);
+    }
+  </style>
+  <section class="psychologists-list">
+    <header>
+      <h2>Psicólogos Disponíveis</h2>
+      {% if consulta %}
+        <p>Resultados para <strong>{{ consulta }}</strong></p>
+        <a class="button-link" href="{% url 'psicologos' %}">Remover filtro</a>
+      {% endif %}
+    </header>
+    {% if psis %}
+      <ul class="psychologists">
+        {% for psicologo in psis %}
+          <li class="psychologist-card">
+            <h2>{{ psicologo.nome }}</h2>
+            {% if psicologo.crp %}
+              <p><strong>CRP:</strong> {{ psicologo.crp }}</p>
+            {% endif %}
+            {% if psicologo.especialidades.all %}
+              <p><strong>Especialidades:</strong> {{ psicologo.especialidades.all|join:", " }}</p>
+            {% endif %}
+            <a class="button-link" href="{% url 'detalhar_psicologo' psicologo.id %}">Marcar consulta!</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="no-results">
+        <p>Nenhum psicólogo encontrado para essa busca.</p>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}

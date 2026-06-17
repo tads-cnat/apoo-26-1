@@ -3,38 +3,76 @@ from django.views import View
 from django.contrib import messages as message
 from .services import PsicologoService, AgendamentoService
 
-class Home(View):
+# Classe HomeView: responsável por exibir a página inicial
+#################
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'main/home.html')
+
+
+# Classe ListarPsicologosView: responsável por exibir a lista de psicólogos disponíveis
+#############################
+class ListarPsicologosView(View):
     def get(self, request, *args, **kwargs):
         srv = PsicologoService()
         psicologos = srv.recupera_psicologos()
-        contexto = {'psicologos': psicologos}
-        return render(request, 'main/home.html', contexto)
+        contexto = {'psis': psicologos}
+        return render(request, 'main/psicologos.html', contexto)
 
+
+# Classe DetalharPsicologoView: responsável por exibir os detalhes de um psicólogo específico
+##############################
 class DetalharPsicologoView(View):
     def get(self, request, *args, **kwargs):
         srv = PsicologoService()
-        id = kwargs['psicologo_id']
+        id = kwargs.get('psi_id')
+        if not id:
+            message.error(request, 'Identificador de psicólogo não fornecido.')
+            return redirect('psicologos')
         contexto = srv.recupera_psicologo(id)
+        if 'erro' in contexto:
+            message.error(request, contexto['erro'])
+            return redirect('psicologos')
         return render(request, 'main/agenda_psicologo.html', contexto)
-    
+
+
+# Classe AgendamentoView: responsável por lidar com o agendamento de consultas
+########################
 class AgendamentoView(View):
     def post(self, request, *args, **kwargs):
         srv = AgendamentoService()
         tipo = request.POST.get('tipo')
         id_horario = kwargs.get('id_h')
-        consulta = srv.nova_consulta(tipo, id_horario, request.user)
-        contexto = {'consulta': consulta}
-        if consulta is None:
-            message.error(request, 'Não foi possível iniciar o agendamento. Tente novamente.')
-            return redirect('home')
+        if tipo and id_horario:
+            contexto = srv.nova_consulta(tipo, id_horario, request.user)
+        else:
+            message.error(request, 'Dados do agendamento incompletos.')
+            return redirect('psicologos')
+        if 'erro' in contexto:
+            message.error(request, contexto['erro'])
+            return redirect('psicologos')
         return render(request, 'main/confirma_consulta.html', contexto)
     
     def get(self, request, *args, **kwargs):
         srv = AgendamentoService()
         id_horario = kwargs.get('id_h')
         retorno = srv.confirmar_consulta(id_horario, request.user)
-        if retorno == 'ok':
+        if 'status' in retorno and retorno['status'] == 'ok':
             message.success(request, 'Consulta agendada com sucesso!')
         else:            
-            message.error(request, 'Não foi possível agendar a consulta.') 
+            message.error(request, retorno.get('erro', 'Erro ao confirmar consulta.')) 
         return redirect('home')
+
+
+# Classe BuscarPsicologoView: responsável por buscar psicólogos com base no nome fornecido
+############################
+class BuscarPsicologoView(View):
+    def get(self, request, *args, **kwargs):
+        srv = PsicologoService()
+        nome = request.GET.get('nome')
+        if not nome:
+            message.error(request, 'Por favor, insira um nome para buscar.')
+            return redirect('psicologos')
+        psicologos = srv.buscar_psicologo(nome)
+        contexto = {'psis': psicologos, 'consulta': 'nome com o texto: \'{}\''.format(nome)}
+        return render(request, 'main/psicologos.html', contexto)

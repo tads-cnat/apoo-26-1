@@ -1,19 +1,10 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-  {% if psicologos %}
-    <ul>
-      {% for psicologo in psicologos %}
-        <li>
-          <strong>{{ psicologo.nome }}</strong> - CRP: {{ psicologo.crp }}
-          {% if psicologo.especialidades.all %}
-            <br/><small>Especialidades: {{ psicologo.especialidades.all|join:", " }}</small>
-          {% endif %}
-          <br/><a href="{% url 'detalhar_psicologo' psicologo.id %}">Marcar consulta!</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Não há psicólogos cadastrados no momento.</p>
-  {% endif %}
+<div class="container">
+    <h2>Bem-vindo à Clínica MenteSã!</h2>
+    <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80" alt="Sala acolhedora para conversas calmas" class="img-fluid rounded mx-auto d-block" style="max-width:250px;" />
+    <p class="text-muted, text-center"><small>(licença aberta via Unsplash.)</small></p>
+    <p>Explore nossos recursos e descubra como podemos ajudar você a alcançar seus objetivos.</p>
+  </div>
 {% endblock %}

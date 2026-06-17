@@ -29,6 +29,7 @@ class Especialidade(models.Model):
 
 # CLASSE Psicologo
 ##################
+PRECO_PADRAO = 100.00  # Valor padrão para consultas, caso não haja preço específico definido
 class Psicologo(models.Model):
     crp = models.CharField(max_length=10)
     nome = models.CharField(max_length=25)
@@ -44,6 +45,12 @@ class Psicologo(models.Model):
             proximos = agenda.horario_set.filter(data__gte=hoje).filter(estado='d').order_by('data')[:15]
             disp.extend(proximos)
         return disp
+    def get_preco(self, tipo):
+        try:
+            preco = self.precoconsulta_set.get(tipo=tipo)
+            return preco.valor
+        except PrecoConsulta.DoesNotExist:
+            return PRECO_PADRAO  # Retorna o preço padrão se não houver preço específico para o tipo de consulta
 
 
 # CLASSE PrecoConsulta

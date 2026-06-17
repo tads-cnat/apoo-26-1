@@ -26,6 +26,7 @@
                                 </div>
                             </div>
                             
+
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <p><strong>Psicólogo:</strong> {{ consulta.horario.agenda.psicologo.nome }}</p>
@@ -38,6 +39,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <p><strong>Especialidades:</strong> {{ consulta.horario.agenda.psicologo.especialidades.all|join:", " }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Preço da Consulta -->
+                            <div class="section mb-4">
+                                <h4 class="mb-3">Preço da Consulta</h4>
+                                <div class="price-box p-3 bg-light rounded">
+                                    {% if preco %}
+                                        <p class="mb-0"><strong>Valor:</strong> R$ {{ preco|floatformat:2 }}</p>
+                                    {% else %}
+                                        <p class="mb-0 text-muted">Preço não informado.</p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
