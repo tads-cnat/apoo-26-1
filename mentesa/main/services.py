@@ -22,7 +22,7 @@ class AgendamentoService():
         horario = Horario.objects.get(pk=id_horario)
         if horario and hasattr(usuario, 'paciente'):
             horario.reservar()
-            consulta = Consulta(tipo_consulta=tipo, paciente=usuario.paciente, horario_id=id_horario)
+            consulta = Consulta(tipo_consulta=tipo, paciente=usuario.paciente, horario=horario)
             consulta.save()
             return consulta
         return None
