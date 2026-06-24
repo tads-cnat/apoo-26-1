@@ -76,3 +76,20 @@ class BuscarPsicologoView(View):
         psicologos = srv.buscar_psicologo(nome)
         contexto = {'psis': psicologos, 'consulta': 'nome com o texto: \'{}\''.format(nome)}
         return render(request, 'main/psicologos.html', contexto)
+    
+
+# Classe CancelarAgendamentoView: responsável por lidar com o cancelamento de agendamentos
+################################
+class CancelarAgendamentoView(View):
+    def get(self, request, *args, **kwargs):
+        srv = AgendamentoService()
+        id_horario = kwargs.get('id_h')
+        if not id_horario:
+            message.error(request, 'Identificador de agendamento não fornecido.')
+            return redirect('home')
+        retorno = srv.cancelar_consulta(id_horario, request.user)
+        if 'status' in retorno and retorno['status'] == 'ok':
+            message.success(request, 'Consulta cancelada com sucesso!')
+        else:
+            message.error(request, retorno.get('erro', 'Erro ao cancelar consulta.'))
+        return redirect('home')

@@ -45,3 +45,14 @@ class AgendamentoService():
             consulta.confirmar()
             return {'status': 'ok'}
         return {'erro': 'Consulta não encontrada ou usuário não é um paciente.'}
+    
+    def cancelar_consulta(self, id_horario, usuario):
+        try:
+            horario = Horario.objects.get(pk=id_horario)
+        except Horario.DoesNotExist:
+            return {'erro': 'Identificador de horário inválido'}
+        consulta = horario.consulta
+        if consulta and hasattr(usuario, 'paciente'):
+            consulta.cancelar()
+            return {'status': 'ok'}
+        return {'erro': 'Consulta não encontrada ou usuário não é um paciente.'}

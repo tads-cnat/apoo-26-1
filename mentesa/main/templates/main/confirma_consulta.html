@@ -108,8 +108,7 @@
                         <button type="submit" class="btn btn-success btn-lg flex-grow-1" form="confirmaConsultaForm">
                             <i class="fas fa-check"></i> Confirmar Agendamento
                         </button>
-                        <!-- TODO: Implement cancel button functionality -->
-                        <a href="#" class="btn btn-secondary btn-lg">
+                        <a href="{% url 'cancelar_agendamento' consulta.horario.id %}" class="btn btn-secondary btn-lg">
                             <i class="fas fa-times"></i> Cancelar
                         </a>
                     </div>

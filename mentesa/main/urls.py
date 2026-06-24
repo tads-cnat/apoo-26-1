@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import HomeView, DetalharPsicologoView, AgendamentoView
-from .views import BuscarPsicologoView, ListarPsicologosView
+from .views import HomeView, AgendamentoView, CancelarAgendamentoView
+from .views import DetalharPsicologoView, BuscarPsicologoView, ListarPsicologosView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -16,4 +16,7 @@ urlpatterns = [
     path(
         'horario/<int:id_h>/agendar/', 
         AgendamentoView.as_view(), name='agendar_consulta'),
+    path(
+        'horario/<int:id_h>/cancelar/',
+        CancelarAgendamentoView.as_view(), name='cancelar_agendamento'),
 ]

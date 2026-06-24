@@ -100,6 +100,9 @@ class Horario(models.Model):
     def agendar(self):
         self.estado = 'a'
         self.save()
+    def liberar(self):
+        self.estado = 'd'
+        self.save()
 
 
 # CLASSE Pagamento
@@ -136,3 +139,6 @@ class Consulta(models.Model):
         self.horario.agendar()
         self.confirmada = True
         self.save()
+    def cancelar(self):
+        self.horario.liberar()
+        self.delete()
