@@ -123,22 +123,36 @@ class Pagamento(models.Model):
 
 # CLASSE Consulta
 #################
+ESTADO_CONSULTA = (
+    (0, 'Pendente'),
+    (1, 'Agendada'),
+    (2, 'Confirmada'),
+    (3, 'Realizada'),
+    (9, 'Cancelada')
+)
 class Consulta(models.Model):
     tipo_consulta = models.IntegerField(choices=TIPO_CONSULTA)
     link_sala = models.URLField(blank=True, null=True)
-    confirmada = models.BooleanField(default=False)
-    realizada = models.BooleanField(default=False)
+    estado = models.IntegerField(choices=ESTADO_CONSULTA, default=0)
     presencial = models.BooleanField(default=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.RESTRICT)
-    horario = models.OneToOneField(Horario, on_delete=models.RESTRICT)
+    horario = models.OneToOneField(Horario, on_delete=models.RESTRICT, null=True, blank=True)
     pagamento = models.OneToOneField(Pagamento, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f'Consulta: {self.get_tipo_consulta_display()} - Paciente: {self.paciente.user.first_name} {self.paciente.user.last_name} - Horário: {self.horario.data} {self.horario.hora}'
-    def confirmar(self):
+    def agendada(self):
         self.horario.agendar()
-        self.confirmada = True
+        self.estado = 1
         self.save()
-    def cancelar(self):
+    def confirmada(self):
+        self.estado = 2
+        self.save()
+    def realizada(self):
+        self.estado = 3
+        self.save()
+    def cancelada(self):
         self.horario.liberar()
-        self.delete()
+        self.horario = None
+        self.estado = 9
+        self.save()

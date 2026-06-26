@@ -16,21 +16,31 @@
 | 2 - o pscólogo clica em um dos agendamentos. |
 | | 3 - o sistema exibe os detalhes do referido agendamento, com uma opção ao final para confirmar ou não. Em caso de não confirmação é necessário preencher um campo de justificativa. |
 | 4 - o psicólogo escolhe a opção "confirmar" agendamento e submete o formulário. |
-| | 5 - o sistema retorna à listagem dos agendamentos não confirmados (passo 1), com uma mensagem indicado que o agendamento foi confirmado com sucesso. | 
+| | 5 - o sistema retorna à listagem dos agendamentos não confirmados (passo 1), com uma mensagem indicado que o agendamento foi confirmado com sucesso. (fim) | 
 
-## Fluxo Alternativo I - ...
+## Fluxo Alternativo I - Nenhum agendamento não confirmado
 | Ações do ator | Ações do sistema |
-| :-----------------: |:-----------------: | 
-| 1.1 - ... | |  
-| | 1.2 - ... |
+| :---: |:---: | 
+| | 1.1 - o sistema exibe uma mensagem indicando que não há agendamento em aberto. |  
+| | 2.1 - o sistema permite que o usuário selecione a opção de retornar à página principal. (fim) |
 
-## Fluxo Alternativo II - ...
+## Fluxo Alternativo II - Identificador de agendamento inválido
 | Ações do ator | Ações do sistema |
-| :-----------------: | :-----------------: | 
-| 2.1 - ... | |  
-| | 2.2 - ... |  
+| :---: | :---: | 
+| | 3.2 - o sistema retorna para a lista dos agendamentos sem confirmação, com uma mensagem indicando que identificador de agendamento é inválido. (fim) |
 
-> Obs. as seções a seguir apenas serão utilizadas na segunda unidade do PDSWeb (segundo orientações do gerente do projeto).
+## Fluxo Alternativo III - Escolha por "não confirmar"
+| Ações do ator | Ações do sistema |
+| :---: | :---: | 
+| 4.3 - o psicólogo escolhe a opção "não confirmar" agendamento, preenche a justificativa e submete o formulário. | |
+| | 5.3 - o sistema libera o horário, muda o estado do agendamento, incluindo a justificativa e retorna para a página principal com a mensagem "agendamento cancelado com sucesso". (fim) | 
+
+
+## Fluxo Alternativo IV - Escolha por "não confirmar" - sem justificativa
+| Ações do ator | Ações do sistema |
+| :---: | :---: | 
+| 4.4 - o psicólogo escolhe a opção "não confirmar" agendamento e submete o formulário. | |  
+| | 5.4 - o sistema retorna à tela dos detalhes do agendamento, com uma mensagem indicando que a não confirmação necessita de uma justificativa. (passo 3 do fluxo principal) | 
 
 ## Diagrama de Interação (Sequência ou Comunicação)
 

@@ -56,7 +56,7 @@ class AgendamentoView(View):
     def get(self, request, *args, **kwargs):
         srv = AgendamentoService()
         id_horario = kwargs.get('id_h')
-        retorno = srv.confirmar_consulta(id_horario, request.user)
+        retorno = srv.agendar_consulta(id_horario, request.user)
         if 'status' in retorno and retorno['status'] == 'ok':
             message.success(request, 'Consulta agendada com sucesso!')
         else:            
