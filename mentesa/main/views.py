@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages as message
-from .services import PsicologoService, AgendamentoService
+from .services import FabricaServicos, PsicologoService, AgendamentoService
 
 # Classe HomeView: responsável por exibir a página inicial
 #################
@@ -93,3 +93,29 @@ class CancelarAgendamentoView(View):
         else:
             message.error(request, retorno.get('erro', 'Erro ao cancelar consulta.'))
         return redirect('home')
+
+# Classe AvaliaAgendamentoView
+##############################
+class AvaliaAgendamentoView(View):
+    def get(self, request, *args, **kwargs):
+        srv = FabricaServicos.servico_agendamento()
+        result = srv.get_nao_confirmados(request.user)
+        if 'lista' in result:
+            return render('main/avalia_consultas.html', result)
+        message.error(request, result['erro'])
+        return redirect('home')
+    def post(self, request, *args, **kwargs):
+        srv = FabricaServicos.servico_agendamento()
+        id_consulta = request.POST.get('id_consulta')
+        justificativa = request.POST.get('justificativa')
+        if id_consulta:
+            result = srv.confirma_agendamento(id_consulta, justificativa)
+            if 'sucesso' in result:
+                message.success(request, result['sucesso'])
+            else:    
+                message.error(request, result['erro'])
+        else:
+            message.error(request, 'Consulta não identificada.')
+        return redirect('avalia_agendamento')
+
+            
